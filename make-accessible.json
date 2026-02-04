@@ -1,0 +1,271 @@
+{
+  "name": "make_accessible",
+  "title": "Default PDF/UA Remediation Preset",
+  "version": "1.0.0",
+  "desc": "Official default remediation preset for automated PDF/UA-1 compliance using PDFix SDK. The preset performs conservative, non-destructive cleanup, structure repair, tagging completion, and accessibility fixes without relying on external tools.",
+  "actions": [
+
+    {
+      "name": "delete_annot",
+      "title": "Delete Annotations (TrapNet, PrinterMark)",
+      "desc": "Remove non-permitted annotation types that commonly cause PDF/UA compliance failures. TrapNet and PrinterMark annotations are production artifacts and must not be present in accessible documents.",
+      "params": [
+        {
+          "name": "annot_types",
+          "value": "^(TrapNet|PrinterMark)$"
+        }
+      ]
+    },
+
+    {
+      "name": "fix_parent_tree",
+      "title": "Fix Parent Tree (Initial repair)",
+      "desc": "Rebuild and normalize the ParentTree to ensure that all marked content references (MCIDs) correctly point to the structure tree. This establishes a stable structural foundation before tagging and cleanup.",
+      "params": []
+    },
+
+    {
+      "name": "add_tags",
+      "title": "AutoTag (Preflight, Preserve Existing Tags)",
+      "desc": "Automatically add missing structure tags using preflight-assisted layout analysis while preserving any existing tag structure. The action does not overwrite tags and does not inject standard layout attributes, keeping remediation conservative and predictable.",
+      "params": [
+        { "name": "template", "value": "" },
+        { "name": "preflight", "value": true },
+        { "name": "standard_attrs", "value": false },
+        { "name": "sequential_headings", "value": false },
+        { "name": "overwrite", "value": false }
+      ]
+    },
+
+    {
+      "name": "delete_tags",
+      "title": "Delete Tags (Empty non-semantic tags)",
+      "desc": "Remove empty structure elements that do not carry semantic meaning and only pollute the tag tree. Headings, table cells, table rows, and list bodies are explicitly preserved to avoid breaking document semantics.",
+      "params": [
+        {
+          "name": "tag_names",
+          "value": {
+            "template": {
+              "tag_update": [
+                {
+                  "query": {
+                    "$and": [
+                      {
+                        "$0_tag_type": {
+                          "$regex": "^(?!H$|H\\d$|TH$|TD$|TR$|LBody$).*"
+                        }
+                      },
+                      {
+                        "$0_has_content": "false"
+                      }
+                    ],
+                    "param": ["pds_struct_elem"]
+                  },
+                  "statement": "$if"
+                }
+              ]
+            }
+          }
+        },
+        { "name": "tag_content", "value": "none" }
+      ]
+    },
+
+    {
+      "name": "delete_tags",
+      "title": "Delete Tags (Whitespace-only content)",
+      "desc": "Remove structure elements whose content consists only of whitespace. The associated content is converted to artifacts to prevent screen readers from announcing meaningless text.",
+      "params": [
+        {
+          "name": "tag_names",
+          "value": {
+            "template": {
+              "tag_update": [
+                {
+                  "query": {
+                    "$and": [
+                      {
+                        "$0_text": {
+                          "$regex": "^\\s*$"
+                        }
+                      }
+                    ],
+                    "param": ["pds_struct_elem"]
+                  },
+                  "statement": "$if"
+                }
+              ]
+            }
+          }
+        },
+        { "name": "tag_content", "value": "artifact" }
+      ]
+    },
+
+    {
+      "name": "remove_content_marks",
+      "title": "Remove Content Marks (Invalid MCIDs)",
+      "desc": "Remove marked-content sequences that reference invalid or broken MCIDs. This prevents structure corruption and resolves common ParentTree and content reference errors.",
+      "params": [
+        { "name": "object_types", "value": ".*" },
+        { "name": "flags", "value": 8 }
+      ]
+    },
+
+    {
+      "name": "artifact_content",
+      "title": "Artifact Untagged Content",
+      "desc": "Mark untagged page content without MCIDs as artifacts. This ensures that decorative or non-semantic content is ignored by assistive technologies.",
+      "params": [
+        {
+          "name": "object_types",
+          "value": {
+            "template": {
+              "object_update": [
+                {
+                  "query": {
+                    "$and": [
+                      { "$0_artifact": "false" },
+                      { "$0_mcid": "-1" }
+                    ],
+                    "param": ["pds_object"]
+                  },
+                  "statement": "$if"
+                }
+              ]
+            }
+          }
+        },
+        { "name": "artifact_type", "value": 0 }
+      ]
+    },
+
+    {
+      "name": "add_missing_unicode",
+      "title": "Add Missing Unicode Mappings",
+      "desc": "Add missing Unicode mappings to text elements to ensure correct text extraction, searchability, and screen reader output.",
+      "params": []
+    },
+
+    {
+      "name": "set_display_doc_title",
+      "title": "Fix Display Document Title",
+      "desc": "Synchronize the ViewerPreferences DisplayDocTitle setting with the actual document title so that assistive technologies announce the correct title.",
+      "params": []
+    },
+
+    {
+      "name": "embed_font",
+      "title": "Embed Fonts",
+      "desc": "Embed all fonts used in the document to ensure consistent rendering and reliable text extraction across platforms and assistive technologies.",
+      "params": []
+    },
+
+    {
+      "name": "fix_headings",
+      "title": "Fix Headings (Normalize hierarchy)",
+      "desc": "Normalize heading hierarchy by resolving skipped levels and converting headings to a consistent generic H structure. This ensures a logical and accessible outline.",
+      "params": [
+        { "name": "renumber_headings", "value": 2 },
+        { "name": "change_headings_to", "value": "H" }
+      ]
+    },
+
+    {
+      "name": "fix_parent_tree",
+      "title": "Fix Parent Tree (Final normalization)",
+      "desc": "Re-run ParentTree repair after tagging and cleanup to ensure all newly created or modified content references are correctly linked.",
+      "params": []
+    },
+
+    {
+      "name": "fix_oc_name",
+      "title": "Fix Optional Content Configuration",
+      "desc": "Repair Optional Content (OCG) configuration dictionaries to ensure layer definitions are valid and accessible.",
+      "params": []
+    },
+
+    {
+      "name": "set_suspect_value",
+      "title": "Clear Suspect Flag",
+      "desc": "Fix the MarkInfo dictionary by clearing the Suspects entry, indicating that the document structure is no longer considered unreliable.",
+      "params": []
+    },
+
+    {
+      "name": "fix_structure_spaces",
+      "title": "Fix Structure Spaces",
+      "desc": "Insert missing spaces between words and mark unnecessary duplicate spaces as artifacts to improve text readability for screen readers.",
+      "params": [
+        { "name": "add_missing_spaces", "value": true },
+        { "name": "remove_unnecessary_spaces", "value": false },
+        { "name": "artifact_unnecessary_spaces", "value": true }
+      ]
+    },
+
+    {
+      "name": "tag_annot",
+      "title": "Tag Untagged Annotations",
+      "desc": "Attach untagged annotations to the nearest appropriate structure elements so that interactive content is included in the document structure.",
+      "params": [
+        {
+          "name": "annot_types",
+          "value": {
+            "template": {
+              "annot_update": [
+                {
+                  "query": {
+                    "$and": [
+                      { "$0_tag_type": "" }
+                    ],
+                    "param": ["pdf_annot"]
+                  },
+                  "statement": "$if"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+
+    {
+      "name": "set_pdf_ua_standard",
+      "title": "Set PDF/UA-1 Identifier",
+      "desc": "Declare PDF/UA-1 conformance by setting the appropriate PDF/UA identifier in the document metadata.",
+      "params": [
+        { "name": "part_number", "value": "1" }
+      ]
+    },
+
+    {
+      "name": "set_tag_id",
+      "title": "Set Tag IDs (Note, TH)",
+      "desc": "Generate unique ID keys for Note and table header (TH) structure elements as required by PDF/UA.",
+      "params": [
+        { "name": "tag_names", "value": "^Note$|^TH$" },
+        { "name": "overwrite", "value": false }
+      ]
+    },
+
+    {
+      "name": "set_tabs_key",
+      "title": "Set Tab Order (Structure)",
+      "desc": "Set the page Tabs key to Structure so keyboard navigation follows the logical reading order.",
+      "params": [
+        { "name": "tabs_key", "value": "S" },
+        { "name": "overwrite", "value": true }
+      ]
+    },
+
+    {
+      "name": "set_language",
+      "title": "Set Document Language (en-US)",
+      "desc": "Define the primary document language to ensure correct pronunciation and processing by assistive technologies.",
+      "params": [
+        { "name": "lang", "value": "en-US" },
+        { "name": "overwrite", "value": false }
+      ]
+    }
+  ]
+}
