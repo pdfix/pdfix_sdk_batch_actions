@@ -2,7 +2,7 @@
   "name": "make_accessible",
   "title": "Default PDF/UA Remediation Preset",
   "version": "1.0.0",
-  "desc": "Official default remediation preset for automated PDF/UA-1 compliance using PDFix SDK. The preset performs conservative, non-destructive cleanup, structure repair, tagging completion, and accessibility fixes without relying on external tools.",
+  "desc": "Official default remediation preset for automated PDF/UA-1 compliance using PDFix SDK. The preset performs conservative, non-destructive cleanup, structure repair, tagging completion, and accessibility fixes.",
   "actions": [
 
     {

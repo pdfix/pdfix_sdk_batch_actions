@@ -13,14 +13,19 @@ Different PDF authoring tools produce PDFs with **systematic and predictable acc
 This repository provides:
 
 - a **universal default remediation workflow** suitable for *any* PDF
-- **source-specific remediation workflows** optimized for:
-  - Microsoft Word
-  - Adobe InDesign
-  - Canva
-  - Chromium / HTML-to-PDF
-  - and other generators
+- **source-specific remediation workflows** optimized for various creation tools
 
 Each preset reflects **real-world PDF/UA failure patterns** and follows PDFix best practices.
+
+- `make_accessible.json` 
+  - Default PDF/UA Remediation Preset
+
+    *Official default remediation preset for automated PDF/UA-1 compliance using PDFix SDK. The preset performs conservative, non-destructive cleanup, structure repair, tagging completion, and accessibility fixes.*
+
+- `fix_indesign.json`
+  - Fix InDesign Files
+    
+    *Specialized remediation preset for PDFs exported from Adobe InDesign. The preset fixes common structural, table, annotation, and PDF/UA issues introduced by InDesign exports and is intended to be used on top of the default PDF/UA remediation workflow.*
 
 ## Execution with PDFix SDK
 
