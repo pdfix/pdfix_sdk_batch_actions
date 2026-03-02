@@ -2,7 +2,7 @@
   "name": "fix_indesign",
   "title": "Fix InDesign Files",
   "desc": "Specialized remediation preset for PDFs exported from Adobe InDesign. The preset fixes common structural, table, annotation, and PDF/UA issues introduced by InDesign exports and is intended to be used on top of the default PDF/UA remediation workflow.",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "min_sdk_version": "8.7.10",
   "max_sdk_version": "",
   "release_date": "21.02.2026",
