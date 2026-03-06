@@ -1,7 +1,8 @@
 {
   "name": "fix_metadata_structure",
-  "title": "Fix Metadata Structure and Consistency",
+  "title": "Normalize Metadata",
   "desc": "Repairs and normalizes document metadata for improved consistency, standards compliance, and accessibility. The preset fixes XMP metadata, detects or sets the document title using defined fallback rules, and applies the PDF/UA identifier.",
+  "keywords": ["repair", "normalize", "metadata", "title", "document title", "xmp", "pdf/ua", "info dictionary"],
   "version": "0.1.0",
   "min_sdk_version": "8.7.16",
   "max_sdk_version": "",

@@ -1,13 +1,30 @@
 {
   "name": "fix_indesign",
-  "title": "Fix InDesign Files",
-  "desc": "Specialized remediation preset for PDFs exported from Adobe InDesign. The preset fixes common structural, table, annotation, and PDF/UA issues introduced by InDesign exports and is intended to be used on top of the default PDF/UA remediation workflow.",
+  "title": "InDesign Quick Fix",
+  "desc": "Supplemental remediation preset for PDFs exported from Adobe InDesign. It fixes common InDesign-specific tagging, table, annotation, and PDF/UA issues and is intended to be used together with the standard PDF/UA remediation workflow.",
+  "keywords": [
+    "indesign",
+    "adobe indesign",
+    "indesign pdf",
+    "indesign export",
+    "pdf/ua",
+    "accessibility",
+    "pdf accessibility",
+    "tagged pdf",
+    "artifact",
+    "untagged content",
+    "table headers",
+    "row header",
+    "tag id",
+    "annotation contents",
+    "link annotation"
+  ],
   "version": "0.2.1",
   "min_sdk_version": "8.7.10",
   "max_sdk_version": "",
   "release_date": "21.02.2026",
   "icon": "indesign",
-  "category" : "", 
+  "category": "Accessibility",
   "actions": [
     {
       "name": "artifact_content",
@@ -22,10 +39,16 @@
                 {
                   "query": {
                     "$and": [
-                      { "$0_artifact": "false" },
-                      { "$0_mcid": "-1" }
+                      {
+                        "$0_artifact": "false"
+                      },
+                      {
+                        "$0_mcid": "-1"
+                      }
                     ],
-                    "param": ["pds_object"]
+                    "param": [
+                      "pds_object"
+                    ]
                   },
                   "statement": "$if"
                 }
@@ -39,7 +62,6 @@
         }
       ]
     },
-
     {
       "name": "rename_tags",
       "title": "Rename Table Cells (TD → TH in First Column)",
@@ -62,7 +84,9 @@
                         "$0_cell_column": "1"
                       }
                     ],
-                    "param": ["pds_struct_elem"]
+                    "param": [
+                      "pds_struct_elem"
+                    ]
                   },
                   "statement": "$if"
                 }
@@ -76,7 +100,6 @@
         }
       ]
     },
-
     {
       "name": "set_structure_attribute",
       "title": "Set Table Header Scope (Row headers)",
@@ -99,7 +122,9 @@
                         "$0_cell_column": "1"
                       }
                     ],
-                    "param": ["pds_struct_elem"]
+                    "param": [
+                      "pds_struct_elem"
+                    ]
                   },
                   "statement": "$if"
                 }
@@ -129,7 +154,6 @@
         }
       ]
     },
-
     {
       "name": "set_tag_id",
       "title": "Set Tag IDs (Note)",
@@ -145,7 +169,6 @@
         }
       ]
     },
-
     {
       "name": "set_annot_contents",
       "title": "Set Annotation Contents (Text from BBox)",
@@ -185,7 +208,6 @@
         }
       ]
     },
-
     {
       "name": "set_pdf_ua_standard",
       "title": "Set PDF/UA-1 Identifier",
@@ -197,6 +219,5 @@
         }
       ]
     }
-
   ]
 }
