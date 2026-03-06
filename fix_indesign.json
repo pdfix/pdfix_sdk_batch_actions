@@ -1,6 +1,6 @@
 {
   "name": "fix_indesign",
-  "title": "InDesign Quick Fix",
+  "title": "InDesign Fix",
   "desc": "Supplemental remediation preset for PDFs exported from Adobe InDesign. It fixes common InDesign-specific tagging, table, annotation, and PDF/UA issues and is intended to be used together with the standard PDF/UA remediation workflow.",
   "keywords": [
     "indesign",
