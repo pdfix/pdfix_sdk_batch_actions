@@ -1,0 +1,66 @@
+{
+  "name": "quickfix",
+  "title": "Quick Fix",
+  "desc": "Automatically repairs common document issues that can be fixed safely without manual review. This preset focuses on simple metadata, structure, font, and accessibility corrections.",
+  "version": "0.3.0",
+  "min_sdk_version": "8.7.8",
+  "max_sdk_version": "",
+  "release_date": "12.12.2025",
+  "category": "Accessibility",
+  "icon": "quickfix",
+  "settings": {
+    "stop_on_action_failure": false
+  },
+  "actions": [
+    {
+      "name": "add_missing_unicode",
+      "title": "Add Missing Unicode Mappings",
+      "desc": "Add missing Unicode mappings to text where they can be derived automatically from the font or character information."
+    },
+    {
+      "name": "set_display_doc_title",
+      "title": "Enable Display Document Title",
+      "desc": "Set the ViewerPreferences entry so PDF viewers display the document title instead of the file name in the window title."
+    },
+    {
+      "name": "set_suspect_value",
+      "title": "Clear Suspects Flag",
+      "desc": "Fix the MarkInfo dictionary and Suspects entry to remove the flag indicating the document structure is unreliable."
+    },
+    {
+      "name": "fix_oc_name",
+      "title": "Fix Optional Content Configuration",
+      "desc": "Repair the optional content configuration dictionary to ensure required entries are valid and properly defined."
+    },
+    {
+      "name": "fix_media_clip_keys",
+      "title": "Fix Media Clip Metadata",
+      "desc": "Add or repair required media clip keys, such as MIME type information, for media clip annotations."
+    },
+    {
+      "name": "set_tabs_key",
+      "title": "Set Page Tab Order",
+      "desc": "Set the Tabs key on pages to ensure a defined tab order for interactive content and form navigation."
+    },
+    {
+      "name": "set_tag_id",
+      "title": "Generate Missing Tag IDs",
+      "desc": "Generate unique structure element IDs for tags that require them, such as Note or TH elements."
+    },
+    {
+      "name": "fix_placement",
+      "title": "Fix Tag Placement Attributes",
+      "desc": "Correct invalid or inappropriate placement attributes for tags such as Figure, Formula, Form, and Note."
+    },
+    {
+      "name": "fix_parent_tree",
+      "title": "Rebuild Parent Tree",
+      "desc": "Repair the structural parent tree to restore correct associations between page content and structure elements."
+    },
+    {
+      "name": "fix_id_tree",
+      "title": "Repair ID Tree",
+      "desc": "Repair the document ID tree to restore valid references for structure elements and tagged content."
+    }
+  ]
+}
