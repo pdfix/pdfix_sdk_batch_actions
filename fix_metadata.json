@@ -8,7 +8,7 @@
   "max_sdk_version": "",
   "release_date": "06.03.2026",
   "category": "",
-  "icon": "",
+  "icon": "fix_metadata",
   "settings": {
     "stop_on_action_failure": false
   },
