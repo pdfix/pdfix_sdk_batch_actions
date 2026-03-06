@@ -1,12 +1,26 @@
 {
-    "actions": [
+  "name": "fix_metadata_structure",
+  "title": "Fix Metadata Structure and Consistency",
+  "desc": "Repairs and normalizes document metadata for improved consistency, standards compliance, and accessibility. The preset fixes XMP metadata, detects or sets the document title using defined fallback rules, and applies the PDF/UA identifier.",
+  "version": "0.1.0",
+  "min_sdk_version": "8.7.16",
+  "max_sdk_version": "",
+  "release_date": "06.03.2026",
+  "category": "",
+  "icon": "",
+  "settings": {
+    "stop_on_action_failure": false
+  },
+  "actions": [
     {
       "name": "fix_metadata",
-      "title": "Fix XMP Metadata"
+      "title": "Fix XMP Metadata",
+      "desc": "Repair and normalize document XMP metadata and synchronize it with the document information dictionary."
     },
     {
       "name": "set_title",
-      "desc": "Set the document Title metadata by picking text from the first matching structure tag (H1). This aligns metadata with the visible main heading for assistive technologies and preserves any existing Title unless overwrite is enabled.",
+      "title": "Set Title from First Heading",
+      "desc": "Set the document title from the first matching structure tag (typically H1).",
       "params": [
         {
           "name": "title_type",
@@ -24,35 +38,12 @@
           "name": "overwrite",
           "value": false
         }
-      ],
-      "title": "Set Title (From H1 Heading)"
+      ]
     },
     {
       "name": "set_title",
-      "desc": "Set the document Title metadata from the PDF Info dictionary. Use this as a reliable fallback when the tag structure does not contain a suitable heading. Existing Title is preserved unless overwrite is enabled.",
-      "params": [
-        {
-          "name": "title_type",
-          "value": "3"
-        },
-        {
-          "name": "custom_text",
-          "value": ""
-        },
-        {
-          "name": "description_tag",
-          "value": ""
-        },
-        {
-          "name": "overwrite",
-          "value": false
-        }
-      ],
-      "title": "Set Title (From Info Dictionary)"
-    },
-    {
-      "name": "set_title",
-      "desc": "Set the document Title metadata from the input file name. This provides a deterministic fallback title when neither tag-based detection nor existing Info metadata is suitable. Existing Title is preserved unless overwrite is enabled.",
+      "title": "Set Title from File Name",
+      "desc": "Use the file name as the document title when no title was detected in the document structure.",
       "params": [
         {
           "name": "title_type",
@@ -70,13 +61,12 @@
           "name": "overwrite",
           "value": false
         }
-      ],
-      "title": "Set Title (From File Name)"
-    }, 
+      ]
+    },
     {
       "name": "set_pdf_ua_standard",
-      "title": "Set PDF/UA-1 Identifier",
-      "desc": "Declare PDF/UA-1 conformance by setting the appropriate PDF/UA identifier in the document metadata.",
+      "title": "Set PDF/UA Identifier",
+      "desc": "Declare the PDF/UA conformance level in the document metadata.",
       "params": [
         {
           "name": "part_number",
@@ -88,5 +78,5 @@
         }
       ]
     }
-    ]
+  ]
 }
