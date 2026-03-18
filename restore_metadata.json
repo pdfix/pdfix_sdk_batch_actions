@@ -1,22 +1,22 @@
 {
-  "name": "fix_metadata_structure",
-  "title": "Normalize Metadata",
+  "name": "restore_metadata",
+  "title": "Restore Metadata",
   "desc": "Repairs and normalizes document metadata for improved consistency, standards compliance, and accessibility. The preset fixes XMP metadata, detects or sets the document title using defined fallback rules, and applies the PDF/UA identifier.",
   "keywords": ["repair", "normalize", "metadata", "title", "document title", "xmp", "pdf/ua", "info dictionary"],
   "version": "0.1.0",
-  "min_sdk_version": "8.7.16",
+  "min_sdk_version": "8.7.17",
   "max_sdk_version": "",
   "release_date": "06.03.2026",
   "category": "",
-  "icon": "fix_metadata",
+  "icon": "restore_metadata",
   "settings": {
     "stop_on_action_failure": false
   },
   "actions": [
     {
-      "name": "fix_metadata",
-      "title": "Fix XMP Metadata",
-      "desc": "Repair and normalize document XMP metadata and synchronize it with the document information dictionary."
+      "name": "reset_metadata",
+      "title": "Reset XMP Metadata",
+      "desc": "Recreate document XMP metadata from scratch and remove all non-essential entries. The resulting metadata contains only the minimal set of properties required for PDF/UA compliance and available document information."
     },
     {
       "name": "set_title",
