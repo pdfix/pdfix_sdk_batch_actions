@@ -32,7 +32,8 @@
           "value": true
         }
       ]
-    }    {
+    },
+    {
       "name": "set_title",
       "title": "Set Title from First Heading",
       "desc": "Set the document title from the first matching structure tag (typically H1).",
