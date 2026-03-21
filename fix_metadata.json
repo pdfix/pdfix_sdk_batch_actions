@@ -1,7 +1,7 @@
 {
-  "name": "restore_metadata",
-  "title": "Restore Metadata",
-  "desc": "Repairs and normalizes document metadata for improved consistency, standards compliance, and accessibility. The preset fixes XMP metadata, detects or sets the document title using defined fallback rules, and applies the PDF/UA identifier.",
+  "name": "fix_metadata_complete",
+  "title": "Fix Metadata (Complete)",
+  "desc": "Repair, normalize, and rebuild document metadata, automatically set the document title, and apply the PDF/UA identifier",
   "keywords": [
     "repair",
     "normalize",
