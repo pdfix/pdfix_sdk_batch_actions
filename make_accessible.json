@@ -259,16 +259,12 @@
     },
     {
       "name": "fix_headings",
-      "title": "Fix Headings (Renumber, Convert to H)",
-      "desc": "Normalize heading hierarchy by resolving skipped levels and converting headings to a consistent generic H structure. This improves outline quality and screen reader navigation.",
+      "title": "Fix Headings (Add missing headings)",
+      "desc": "Normalize heading hierarchy by resolving skipped levels and converting headings to a consistent generic H* structure. This improves outline quality and screen reader navigation.",
       "params": [
         {
           "name": "renumber_headings",
           "value": 2
-        },
-        {
-          "name": "change_headings_to",
-          "value": "H"
         }
       ]
     },
