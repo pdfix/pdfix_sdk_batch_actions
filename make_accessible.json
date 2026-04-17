@@ -282,7 +282,7 @@
     },
     {
       "name": "fix_structure_spaces",
-      "title": "Fix Structure Spaces (Add missing, Artifact unnecessary)",
+      "title": "Fix Spaces (Add missing, Artifact unnecessary)",
       "desc": "Insert missing spaces between words and mark unnecessary spaces as artifacts to improve text readability for screen readers.",
       "params": [
         {
