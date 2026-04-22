@@ -247,7 +247,7 @@
     },
     {
       "name": "embed_font",
-      "title": "Embed Fonts",
+      "title": "Fix Fonts",
       "desc": "Embed all fonts used in the document to ensure consistent rendering and reliable text extraction across platforms and assistive technologies.",
       "params": []
     },
@@ -607,6 +607,11 @@
       ]
     },
     {
+      "name": "fix_id_tree",
+      "title": "Fix ID Tree",
+      "desc": "Repair the document ID tree to restore valid references for structure elements and tagged content."
+    },
+    {
       "name": "set_tabs_key",
       "title": "Set Tab Order (Structure)",
       "desc": "Set the page Tabs key to Structure so keyboard navigation follows the logical reading order.",
@@ -625,6 +630,29 @@
       "name": "fix_metadata",
       "desc": "Repair and normalize document XMP metadata to improve standards compliance and consistency",
       "title": "Fix XMP Metadata"
+    },
+    {
+      "name": "set_title",
+      "desc": "Set the document Title metadata by picking text from the first matching structure tag (Title). This aligns metadata with the visible main heading for assistive technologies and preserves any existing Title unless overwrite is enabled.",
+      "params": [
+        {
+          "name": "title_type",
+          "value": "1"
+        },
+        {
+          "name": "custom_text",
+          "value": ""
+        },
+        {
+          "name": "description_tag",
+          "value": "Title"
+        },
+        {
+          "name": "overwrite",
+          "value": false
+        }
+      ],
+      "title": "Set Title (From Title Tag)"
     },
     {
       "name": "set_title",
@@ -648,8 +676,7 @@
         }
       ],
       "title": "Set Title (From H1 Heading)"
-    },
-    {
+    },    {
       "name": "set_title",
       "desc": "Set the document Title metadata from the PDF Info dictionary. Use this as a reliable fallback when the tag structure does not contain a suitable heading. Existing Title is preserved unless overwrite is enabled.",
       "params": [
