@@ -1,6 +1,6 @@
 {
   "name": "quickfix",
-  "title": "Pre-Remediation Cleanup",
+  "title": "Pre-Remediation",
   "desc": "Automatically repairs common document issues that can be fixed safely without manual review. This preset focuses on simple metadata, structure, font, and accessibility corrections.",
   "keywords": [
     "quick fix",
@@ -21,10 +21,10 @@
     "optional content",
     "metadata repair"
   ],
-  "version": "0.4.0",
+  "version": "0.4.1",
   "min_sdk_version": "8.8.0",
   "max_sdk_version": "",
-  "release_date": "12.12.2025",
+  "release_date": "2025-12-12",
   "category": "Accessibility",
   "icon": "quickfix",
   "settings": {

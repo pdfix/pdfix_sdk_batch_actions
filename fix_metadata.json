@@ -12,10 +12,10 @@
     "pdf/ua",
     "info dictionary"
   ],
-  "version": "0.2.0",
+  "version": "0.2.1",
   "min_sdk_version": "8.8.0",
   "max_sdk_version": "",
-  "release_date": "21.03.2026",
+  "release_date": "2026-03-21",
   "category": "",
   "icon": "fix_metadata",
   "settings": {

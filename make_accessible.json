@@ -2,10 +2,10 @@
   "name": "make_accessible",
   "title": "Make Accessible",
   "desc": "Official default remediation preset for automated PDF/UA-1 compliance using PDFix SDK. The preset performs conservative, non-destructive cleanup, structure repair, tagging completion, and accessibility fixes.",
-  "version": "0.7.0",
+  "version": "0.7.1",
   "min_sdk_version": "8.8.0",
   "max_sdk_version": "",
-  "release_date": "2026/04/17",
+  "release_date": "2026-04-17",
   "category": "Accessibility",
   "icon": "accessibility_new",
   "settings": {
@@ -145,46 +145,6 @@
         {
           "name": "tag_content",
           "value": "none"
-        }
-      ]
-    },
-    {
-      "name": "delete_tags",
-      "title": "Delete Tags (Whitespace-only content)",
-      "desc": "Remove structure elements whose content consists only of whitespace. The associated content is converted to artifacts to prevent screen readers from announcing meaningless text.",
-      "params": [
-        {
-          "name": "tag_names",
-          "value": {
-            "template": {
-              "tag_update": [
-                {
-                  "query": {
-                    "$and": [
-                      {
-                        "$0_tag_type": {
-                          "$regex": "^(?!H$|H\\d$|TH$|TD$|TR$|LBody$).*"
-                        }
-                      },
-                      {
-                        "$0_text": {
-                          "$regex": "^\\s*$"
-                        }
-                      }
-                    ],
-                    "param": [
-                      "pds_struct_elem"
-                    ]
-                  },
-                  "statement": "$if"
-                }
-              ]
-            }
-          }
-        },
-        {
-          "name": "tag_content",
-          "value": "artifact"
         }
       ]
     },
