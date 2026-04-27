@@ -2,7 +2,7 @@
   "name": "make_accessible_docling",
   "title": "Make Accessible Docling",
   "desc": "Official remediation preset for automated PDF/UA-1 compliance using Docling. This preset applies a comprehensive sequence of actions to clean up existing structure, apply AI-assisted auto-tagging, and perform targeted fixes to ensure the resulting document meets PDF/UA-1 accessibility standards. The preset is designed for maximum compatibility and reliability when processing documents with Docling's autotagging capabilities.",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "min_sdk_version": "8.8.0",
   "max_sdk_version": "",
   "release_date": "2026-04-16",
@@ -54,7 +54,7 @@
           "flags": 4,
           "name": "output_pdf",
           "type": "file_path",
-          "value": "_output.pdf"
+          "value": ""
         },
         {
           "ext": "",
