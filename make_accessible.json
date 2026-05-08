@@ -567,6 +567,22 @@
       ]
     },
     {
+      "name": "set_tag_bbox",
+      "title": "Set Tag BBox (Figure/Formula/Form)",
+      "desc": "Calculate bounding boxes from associated tag content and store them in Layout attributes for Figure, Formula, and Form structure elements. Existing BBox values are preserved unless overwrite is enabled.",
+      "expanded": true,
+      "params": [
+        {
+          "name": "tag_names",
+          "value": "^Figure$|^Formula$|^Form$$"
+        },
+        {
+          "name": "overwrite",
+          "value": "false"
+        }
+      ]
+    },
+    {
       "name": "fix_id_tree",
       "title": "Fix ID Tree",
       "desc": "Repair the document ID tree to restore valid references for structure elements and tagged content."
