@@ -16,7 +16,7 @@
   "min_sdk_version": "8.8.0",
   "max_sdk_version": "",
   "release_date": "2026-03-21",
-  "category": "",
+  "category": "Metadata",
   "icon": "fix_metadata",
   "settings": {
     "stop_on_action_failure": false
