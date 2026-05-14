@@ -518,13 +518,6 @@
           "name": "renumber_headings",
           "type": "int",
           "value": "2"
-        },
-        {
-          "ext": "",
-          "flags": 0,
-          "name": "change_headings_to",
-          "type": "",
-          "value": "H"
         }
       ],
       "title": "Fix Headings"
