@@ -73,21 +73,546 @@
         {
           "ext": "",
           "flags": 0,
-          "name": "per_page",
+          "name": "bbox_overlap",
+          "type": "float",
+          "value": "0.6"
+        },
+        {
+          "ext": "",
+          "flags": 0,
+          "name": "chapters",
           "type": "bool",
           "value": true
+        },
+        {
+          "ext": "",
+          "flags": 0,
+          "name": "render",
+          "type": "string",
+          "value": "default"
+        },
+        {
+          "ext": "",
+          "flags": 0,
+          "name": "sequential_headings",
+          "type": "bool",
+          "value": false
         }
       ],
       "name": "pdfix_autotag_docling",
       "desc": "Automatically add structure tags using AI-assisted layout analysis without preserving an existing tag structure. The action overwrites existing tags.",
       "path": "",
-      "program": "docker run --platform linux/amd64 -v \"${working_directory}:/data\" -w /data --rm pdfix/pdf-accessibility-docling:v1.2.21 tag --name \"${license_name}\" --key \"${license_key}\" -i \"/data/${input_pdf}\" -o \"/data/${output_pdf}\" --do_formula_recognition \"${process_formula}\" --do_image_description \"${describe_images}\" --per_page \"${per_page}\"",
+      "program": "docker run --platform linux/amd64 -v \"${working_directory}:/data\" -w /data --rm pdfix/pdf-accessibility-docling:v1.3.4 tag --name \"${license_name}\" --key \"${license_key}\" -i \"/data/${input_pdf}\" -o \"/data/${output_pdf}\" --do_formula_recognition \"${process_formula}\" --do_image_description \"${describe_images}\" --bbox_overlap \"${bbox_overlap}\" --chapters \"${chapters}\" --render \"${render}\" --sequential_headings \"${sequential_headings}\"",
       "returnCodes": [
         0
       ],
       "stderr": "",
       "stdout": "",
       "title": "AutoTag (Docling)"
+    },
+    {
+      "name": "merge_tags",
+      "title": "Merge Chapters and Sections Split by Pages",
+      "desc": "Join a chapter or section (Part, Sect) that continues on the next page into one tag, so the structure follows chapters instead of pages. Repeated to join nested levels.",
+      "params": [
+        {
+          "name": "tag_names",
+          "value": {
+            "template": {
+              "tag_neighbours": [
+                {
+                  "statement": "$if",
+                  "query": {
+                    "param": [
+                      "pds_struct_elem",
+                      "pds_struct_elem"
+                    ],
+                    "$and": [
+                      {
+                        "$0_tag_type": {
+                          "$regex": "^(NonStruct|Sect|Part)$"
+                        }
+                      },
+                      {
+                        "$1_tag_type": {
+                          "$eq": "$0_tag_type"
+                        }
+                      },
+                      {
+                        "$1_page_num": {
+                          "$gt": "$0_page_num"
+                        }
+                      },
+                      {
+                        "$1_children_tag_type": {
+                          "$regex": "^(?!H[1-6]?(\\||$))"
+                        }
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "adjacent_type",
+          "value": ""
+        },
+        {
+          "name": "skip_tags",
+          "value": ""
+        },
+        {
+          "name": "merge_target",
+          "value": "first"
+        },
+        {
+          "name": "tag_name",
+          "value": ""
+        }
+      ]
+    },
+    {
+      "name": "merge_tags",
+      "title": "Merge Chapters and Sections Split by Pages",
+      "desc": "Join a chapter or section (Part, Sect) that continues on the next page into one tag, so the structure follows chapters instead of pages. Repeated to join nested levels.",
+      "params": [
+        {
+          "name": "tag_names",
+          "value": {
+            "template": {
+              "tag_neighbours": [
+                {
+                  "statement": "$if",
+                  "query": {
+                    "param": [
+                      "pds_struct_elem",
+                      "pds_struct_elem"
+                    ],
+                    "$and": [
+                      {
+                        "$0_tag_type": {
+                          "$regex": "^(NonStruct|Sect|Part)$"
+                        }
+                      },
+                      {
+                        "$1_tag_type": {
+                          "$eq": "$0_tag_type"
+                        }
+                      },
+                      {
+                        "$1_page_num": {
+                          "$gt": "$0_page_num"
+                        }
+                      },
+                      {
+                        "$1_children_tag_type": {
+                          "$regex": "^(?!H[1-6]?(\\||$))"
+                        }
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "adjacent_type",
+          "value": ""
+        },
+        {
+          "name": "skip_tags",
+          "value": ""
+        },
+        {
+          "name": "merge_target",
+          "value": "first"
+        },
+        {
+          "name": "tag_name",
+          "value": ""
+        }
+      ]
+    },
+    {
+      "name": "merge_tags",
+      "title": "Merge Chapters and Sections Split by Pages",
+      "desc": "Join a chapter or section (Part, Sect) that continues on the next page into one tag, so the structure follows chapters instead of pages. Repeated to join nested levels.",
+      "params": [
+        {
+          "name": "tag_names",
+          "value": {
+            "template": {
+              "tag_neighbours": [
+                {
+                  "statement": "$if",
+                  "query": {
+                    "param": [
+                      "pds_struct_elem",
+                      "pds_struct_elem"
+                    ],
+                    "$and": [
+                      {
+                        "$0_tag_type": {
+                          "$regex": "^(NonStruct|Sect|Part)$"
+                        }
+                      },
+                      {
+                        "$1_tag_type": {
+                          "$eq": "$0_tag_type"
+                        }
+                      },
+                      {
+                        "$1_page_num": {
+                          "$gt": "$0_page_num"
+                        }
+                      },
+                      {
+                        "$1_children_tag_type": {
+                          "$regex": "^(?!H[1-6]?(\\||$))"
+                        }
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "adjacent_type",
+          "value": ""
+        },
+        {
+          "name": "skip_tags",
+          "value": ""
+        },
+        {
+          "name": "merge_target",
+          "value": "first"
+        },
+        {
+          "name": "tag_name",
+          "value": ""
+        }
+      ]
+    },
+    {
+      "name": "merge_tags",
+      "title": "Merge Chapters and Sections Split by Pages",
+      "desc": "Join a chapter or section (Part, Sect) that continues on the next page into one tag, so the structure follows chapters instead of pages. Repeated to join nested levels.",
+      "params": [
+        {
+          "name": "tag_names",
+          "value": {
+            "template": {
+              "tag_neighbours": [
+                {
+                  "statement": "$if",
+                  "query": {
+                    "param": [
+                      "pds_struct_elem",
+                      "pds_struct_elem"
+                    ],
+                    "$and": [
+                      {
+                        "$0_tag_type": {
+                          "$regex": "^(NonStruct|Sect|Part)$"
+                        }
+                      },
+                      {
+                        "$1_tag_type": {
+                          "$eq": "$0_tag_type"
+                        }
+                      },
+                      {
+                        "$1_page_num": {
+                          "$gt": "$0_page_num"
+                        }
+                      },
+                      {
+                        "$1_children_tag_type": {
+                          "$regex": "^(?!H[1-6]?(\\||$))"
+                        }
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "adjacent_type",
+          "value": ""
+        },
+        {
+          "name": "skip_tags",
+          "value": ""
+        },
+        {
+          "name": "merge_target",
+          "value": "first"
+        },
+        {
+          "name": "tag_name",
+          "value": ""
+        }
+      ]
+    },
+    {
+      "name": "merge_tags",
+      "title": "Merge Chapters and Sections Split by Pages",
+      "desc": "Join a chapter or section (Part, Sect) that continues on the next page into one tag, so the structure follows chapters instead of pages. Repeated to join nested levels.",
+      "params": [
+        {
+          "name": "tag_names",
+          "value": {
+            "template": {
+              "tag_neighbours": [
+                {
+                  "statement": "$if",
+                  "query": {
+                    "param": [
+                      "pds_struct_elem",
+                      "pds_struct_elem"
+                    ],
+                    "$and": [
+                      {
+                        "$0_tag_type": {
+                          "$regex": "^(NonStruct|Sect|Part)$"
+                        }
+                      },
+                      {
+                        "$1_tag_type": {
+                          "$eq": "$0_tag_type"
+                        }
+                      },
+                      {
+                        "$1_page_num": {
+                          "$gt": "$0_page_num"
+                        }
+                      },
+                      {
+                        "$1_children_tag_type": {
+                          "$regex": "^(?!H[1-6]?(\\||$))"
+                        }
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "adjacent_type",
+          "value": ""
+        },
+        {
+          "name": "skip_tags",
+          "value": ""
+        },
+        {
+          "name": "merge_target",
+          "value": "first"
+        },
+        {
+          "name": "tag_name",
+          "value": ""
+        }
+      ]
+    },
+    {
+      "name": "merge_tags",
+      "title": "Merge Chapters and Sections Split by Pages",
+      "desc": "Join a chapter or section (Part, Sect) that continues on the next page into one tag, so the structure follows chapters instead of pages. Repeated to join nested levels.",
+      "params": [
+        {
+          "name": "tag_names",
+          "value": {
+            "template": {
+              "tag_neighbours": [
+                {
+                  "statement": "$if",
+                  "query": {
+                    "param": [
+                      "pds_struct_elem",
+                      "pds_struct_elem"
+                    ],
+                    "$and": [
+                      {
+                        "$0_tag_type": {
+                          "$regex": "^(NonStruct|Sect|Part)$"
+                        }
+                      },
+                      {
+                        "$1_tag_type": {
+                          "$eq": "$0_tag_type"
+                        }
+                      },
+                      {
+                        "$1_page_num": {
+                          "$gt": "$0_page_num"
+                        }
+                      },
+                      {
+                        "$1_children_tag_type": {
+                          "$regex": "^(?!H[1-6]?(\\||$))"
+                        }
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "adjacent_type",
+          "value": ""
+        },
+        {
+          "name": "skip_tags",
+          "value": ""
+        },
+        {
+          "name": "merge_target",
+          "value": "first"
+        },
+        {
+          "name": "tag_name",
+          "value": ""
+        }
+      ]
+    },
+    {
+      "name": "merge_tags",
+      "title": "Merge Chapters and Sections Split by Pages",
+      "desc": "Join a chapter or section (Part, Sect) that continues on the next page into one tag, so the structure follows chapters instead of pages. Repeated to join nested levels.",
+      "params": [
+        {
+          "name": "tag_names",
+          "value": {
+            "template": {
+              "tag_neighbours": [
+                {
+                  "statement": "$if",
+                  "query": {
+                    "param": [
+                      "pds_struct_elem",
+                      "pds_struct_elem"
+                    ],
+                    "$and": [
+                      {
+                        "$0_tag_type": {
+                          "$regex": "^(NonStruct|Sect|Part)$"
+                        }
+                      },
+                      {
+                        "$1_tag_type": {
+                          "$eq": "$0_tag_type"
+                        }
+                      },
+                      {
+                        "$1_page_num": {
+                          "$gt": "$0_page_num"
+                        }
+                      },
+                      {
+                        "$1_children_tag_type": {
+                          "$regex": "^(?!H[1-6]?(\\||$))"
+                        }
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "adjacent_type",
+          "value": ""
+        },
+        {
+          "name": "skip_tags",
+          "value": ""
+        },
+        {
+          "name": "merge_target",
+          "value": "first"
+        },
+        {
+          "name": "tag_name",
+          "value": ""
+        }
+      ]
+    },
+    {
+      "name": "merge_tags",
+      "title": "Merge Chapters and Sections Split by Pages",
+      "desc": "Join a chapter or section (Part, Sect) that continues on the next page into one tag, so the structure follows chapters instead of pages. Repeated to join nested levels.",
+      "params": [
+        {
+          "name": "tag_names",
+          "value": {
+            "template": {
+              "tag_neighbours": [
+                {
+                  "statement": "$if",
+                  "query": {
+                    "param": [
+                      "pds_struct_elem",
+                      "pds_struct_elem"
+                    ],
+                    "$and": [
+                      {
+                        "$0_tag_type": {
+                          "$regex": "^(NonStruct|Sect|Part)$"
+                        }
+                      },
+                      {
+                        "$1_tag_type": {
+                          "$eq": "$0_tag_type"
+                        }
+                      },
+                      {
+                        "$1_page_num": {
+                          "$gt": "$0_page_num"
+                        }
+                      },
+                      {
+                        "$1_children_tag_type": {
+                          "$regex": "^(?!H[1-6]?(\\||$))"
+                        }
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "adjacent_type",
+          "value": ""
+        },
+        {
+          "name": "skip_tags",
+          "value": ""
+        },
+        {
+          "name": "merge_target",
+          "value": "first"
+        },
+        {
+          "name": "tag_name",
+          "value": ""
+        }
+      ]
     },
     {
       "name": "set_display_doc_title",
